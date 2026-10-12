@@ -1,52 +1,23 @@
 package giocanumeri;
-public class Giocatore extends Thread {
 
-    String nome;
-    int punteggio;
-    String parola;
+/**
+ * @see UdA n. 1 Esercitazione n. 1 GiocaNumeri
+ * @author alice carletti
+ */
+public class GiocaNumeriRunnable {
 
-    /**
-     * Crea un giocatore
-     */
-    public Giocatore(String nome, int punteggio) {
-        this.nome = nome;
-        this.punteggio = punteggio;
-    }
+    public static void main(String[] args) {
 
+        System.out.println("INIZIO GIOCO");
 
-    void gioca() {
+        GiocatoreRunnable g1 = new GiocatoreRunnable("Alice", 0);
+        Thread t1 = new Thread(g1);
+        t1.start();
 
-        int numero = 19;
-        parola = "Buongiorno";
+        GiocatoreRunnable g2 = new GiocatoreRunnable("Greta", 0);
+        Thread t2 = new Thread(g2);
+        t2.start();
 
-        for (int i = 0; i < numero; i++) {
-            System.out.println("Giocatore " + nome + ": " + i);
-
-            try {
-                sleep(2000);
-            } catch (InterruptedException e) {
-                System.err.println(
-                        "Errore durante la sospensione del thread"
-                );
-            }
-        }
-
-        punteggio = 10;
-    }
-
-
-    void comunica() {
-        System.out.println(
-                "Giocatore " + nome
-                        + " - punteggio: " + punteggio
-                        + " - parola scelta: " + parola
-        );
-    }
-
-
-    @Override
-    public void run() {
-        gioca();
-        comunica();
+        System.out.println("FINE GIOCO");
     }
 }
