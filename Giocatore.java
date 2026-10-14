@@ -1,4 +1,4 @@
-package giocanumeri;
+package giocanumerirunnable;
 
 public class Giocatore implements Runnable {
 
@@ -13,7 +13,7 @@ public class Giocatore implements Runnable {
 
     void gioca() {
         int numero = 19;
-        parola = "Buongiorno";
+        parola = "BUONGIORNO";
 
         for (int i = 0; i < numero; i++) {
             System.out.println("Giocatore " + nome + ": " + i);
@@ -21,7 +21,7 @@ public class Giocatore implements Runnable {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                System.err.println("Errore nella transizione running-sleeping");
+                System.err.println("Errore");
             }
         }
 
@@ -33,8 +33,27 @@ public class Giocatore implements Runnable {
                 + punteggio + " ha scelto la parola: " + parola);
     }
 
+
     @Override
     public void run() {
+        thread.start();
+        System.out.println("ID: " + thread.getName());
+        System.out.println("Stato: " + thread.getState());
+        System.out.println("Priorità: " + thread.getPriority());
+        System.out.println("Attivo: " + thread.isAlive());
+        thread.interrupt();
+        try {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedExeption e) {
+            e.printStackTrace();
+            System.out.println("ID: " + thread.getName());
+            System.out.println("Stato: " + thread.getState());
+            System.out.println("Priorità: " + thread.getPriority());
+            System.out.println("Attivo: " + thread.isAlive());
+        }
+
+
         gioca();
         comunica();
     }
